@@ -1,8 +1,121 @@
 #include <iostream>
+#include <cstring>
 
-int main() 
-  // tic tac toe grid
-  int grid[3][3];
+using namespace std;
 
+bool checkWin(char[3][3] board, char player) {
+  int hwin = 0;
+  int vwin = 0;
+  int dlwin = 0;
+  int drwin = 0;
+
+  for (int x = 0; x < 3; x++) {
+    for (int y = 0; y < 3; y++) {
+      char value = board[x][y];
+      
+      if (value == player) {
+	
+      }
+    }
+  }
+}
+
+int main() {
+  // game array and misc visuals
+  char none = '.';
+  char any = '?';
+  char X = 'X';
+  char O = 'O';
+  char grid[][] = {
+    {none, none, none},
+    {none, none, none},
+    {none, none, none}
+  };
+
+  // win condition library
+  // horizontal win
+  char winH[][] = {
+    {none, none, none},
+    {any,  any,   any},
+    {none, none, none}
+  };
+  // vertical win 
+  char winV[][] = {
+    {none, any, none},
+    {none, any, none},
+    {none, any, none}
+  };
+  // left diagonal win
+  char winDL[][] = {
+    {any,  none,  none},
+    {none, any,   none},
+    {none, none,  any}
+  };
+  // right diagonal win
+  char winDR[][] = {
+    {none, none, any},
+    {none, any,  none},
+    {any,  none, none}
+  };
+
+  // game states
+  bool isRunning = true;
+  
+  int START = 0;
+  int XTURN = 1;
+  int OTURN = 2;
+  int XWON = 3;
+  int OWON = 4;
+  int DRAW = 5;
+  int state = START;
+  
+  // game loop
+  while (isRunning) {
+
+    // start the game
+    if (state == START) {
+      state = XTURN;
+    }
+    
+    // print board
+    cout             <<"  1"         <<"2"         <<"3"   << endl;
+    cout << "a " << grid[0][0] << grid[1][0] << grid[2][0] << endl;
+    cout << "b " << grid[0][1] << grid[1][1] << grid[2][1] << endl;
+    cout << "c " << grid[0][2] << grid[1][2] << grid[2][2] << endl;
+    
+    // get players input
+    char input[2];
+    cin >> input;
+
+    // convert to grid position
+    int xpos = int(input[1]) - 48 - 1; // already a number value, but offset down to a 0
+    int ypos = int(input[0]) - 96 - 1; // offset char to get number value
+    char value = grid[xpos][ypos];
+
+
+    // place into grid
+    if (value == none) {
+      if (state == XTURN) {
+	grid[xpos][ypos] = x;
+	state = OTURN;
+      }
+      else if (state == OTURN) {
+	grid[xpos][ypos] = o;
+	state = XTURN;
+      }
+    }
+    else {
+      cout << "Invalid Move!" << endl;
+    }
+
+    // check for a win or draw
+    
+  }
+  
   return 0;
 }
+
+bool checkWin() {
+  
+}
+  
