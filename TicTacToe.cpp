@@ -166,6 +166,7 @@ int main() {
 
       cout << "Welcome to TicTacToe!" << endl;
     }
+    // game loop
     else {
       // print board
       printBoard(grid);
