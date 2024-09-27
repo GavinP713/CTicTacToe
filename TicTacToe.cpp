@@ -146,9 +146,13 @@ int main() {
     {none, none, none}
   };
 
-  // game states
+  // program info
   bool isRunning = true;
+  int round = 0;
+  int xscore = 0;
+  int oscore = 0;
   
+  // game states
   int START = 0;
   int XTURN = 1;
   int OTURN = 2;
@@ -156,15 +160,26 @@ int main() {
   int OWON = 4;
   int DRAW = 5;
   int state = START;
+
+  cout << "Welcome to TicTacToe" << endl;
   
   // game loop
   while (isRunning) {
 
     // start the game
     if (state == START) {
+      round ++;
       state = XTURN;
 
-      cout << "Welcome to TicTacToe!" << endl;
+      // reset the board
+      for (int x = 0; x < 3; x++) {
+	for (int y = 0; y < 3; y++) {
+	  grid[x][y] = none;
+	}
+      }
+      
+      cout << "____________________________________________" << endl;
+      cout << "Round " << round << ". FIGHT!" << endl;
     }
     // game loop
     else {
@@ -180,6 +195,7 @@ int main() {
       }
       // game over message
       else {
+	cout << "____________________________________________" << endl;
 	cout << "Game Over!" << endl;
 	
 	// draw message
@@ -189,15 +205,32 @@ int main() {
 	// x win message
 	else if (state == XWON) {
 	  cout << "X won" << endl;
+	  xscore++;
 	}
 	// o win message
 	else if (state == OWON) {
 	  cout << "O won" << endl;
+	  oscore++;
 	}
 
+	// display scores
+	cout << "Score: " << xscore << " to " << oscore << endl;
+	
+	// prompt new round
+	char input[2];
+	cout << "play again?  y/n" << endl;
+	cin >> input;
+
+	// start new round
+	if (input[0] == 'y') {
+	  state = START;
+	  continue;
+	}
 	// end game
-	isRunning = false;
-	return 0;
+	else if (input[0] == 'n') {
+	  isRunning = false;
+	  continue;
+	}
       }
       
       // get players input
